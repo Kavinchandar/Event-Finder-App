@@ -63,7 +63,7 @@ async function handleClick() {
     //sending form data to backend if form valid
     if(keyword != '' && location != ''){
             //reset all elements before searching a new event
-            let response = await fetch(`https://event-finder-app-cs571.wl.r.appspot.com/allEvents?keyword=${keyword}&radius=${distance}&category=${category}&location=${location}`, {
+            let response = await fetch(`/allEvents?keyword=${keyword}&radius=${distance}&category=${category}&location=${location}`, {
                 method: 'GET',
                 xhrFields: {
                     withCredentials: true
@@ -137,7 +137,7 @@ async function handleClick() {
 
 async function displayDetail(Event_id){
     console.log(Event_id);
-    let response = await fetch(`https://event-finder-app-cs571.wl.r.appspot.com/eventDetails?event_id=${Event_id}`, {
+    let response = await fetch(`/eventDetails?event_id=${Event_id}`, {
                 method: 'GET',
                 xhrFields: {
                     withCredentials: true
@@ -275,7 +275,7 @@ async function displayDetail(Event_id){
 
 async function displayVenue(venue){
     document.getElementById('collapse').innerHTML = '';
-    let response = await fetch(`https://event-finder-app-cs571.wl.r.appspot.com/venueDetails?keyword=${venue}`, {
+    let response = await fetch(`/venueDetails?keyword=${venue}`, {
                 method: 'GET',
                 xhrFields: {
                     withCredentials: true
