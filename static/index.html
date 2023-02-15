@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Events Page</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/style.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <body>
+        
+        <!--searchbox-->
+        <section id="show-case">
+                <div class='container'>
+                        <div class='glass' id="search-box">
+                            <div class="box-1">
+                                <span class="title">Events Search</span>
+                            </div>
+
+                            <div class="line"></div>
+
+                            <div class="box-2">
+
+                                <form action="#" id="my-form" method="get" >
+
+                                    <div class="card-1 user-details">
+                                        <span class="label font">Keyword<span style="color: rgb(255, 40, 2);">*</span></span>
+                                        <div class="input-box">
+                                            <input type="text" name="keyword" id="keyword" value="" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-2">
+                                        <div class="user-details-d">
+                                            <span class="label font">Distance (miles)</span>
+                                            <div class="input-box">
+                                                <input type="number" name="distance" id="distance" value="10"/>
+                                            </div>
+                                        </div>
+                                        <div class="user-details-c">
+                                            <span class="label font">Category<span style="color: rgb(255, 40, 2);">*</span></span>
+                                            <div class="input-box">
+                                                <select name="category" id="category" placeholder="Default">
+                                                    <option value="Default" class="">Default</option>
+                                                    <option value="Music" class="">Music</option>
+                                                    <option value="Sports" class="">Sports</option>
+                                                    <option value="Arts" class="">Arts & Theatre</option>
+                                                    <option value="Film" class="">Film</option>
+                                                    <option value="Miscellanious" class="">Miscellanious</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="card-3 user-details">
+                                        <div>
+                                            <span class="label font">Location<span style="color: rgb(255, 40, 2);">*</span></span>
+                                            <input type="checkbox" name="Auto-Detect Location" id="auto-location">
+                                            <span for="auto-location" style="color: rgba(255,255,255,0.7);">Auto-Detect Location</span>
+                                            <div class="input-box">
+                                                <input type="text" name="location" id="location" value="" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-4 user-details">
+                                        <div>
+                                            <button id="search-button" value="click">SEARCH</button> 
+                                            <button id="clear-button" value="click">CLEAR</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                    </div>
+                    </div>   
+        </section>
+
+        <!--eventstable-->
+        <section id="events-table">
+            <div class="container">
+                <div id="results">
+                    <div id="not-found"></div>
+                    <table id="my-table">
+                        <thead class="table-heading font" id="table-head">
+
+                        </thead>
+                        <tbody class="font" id="table-body">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+            
+        <!--EventDetails-->
+        <section id="event-details">
+            <div class="container">
+                <div class="event-card" id ='my-event-card'>
+                    <div class="event-title" id="my-event-title">
+                        
+                    </div>
+                    <div class="event-info" id="my-event-info">
+                        
+                    </div>
+                    <div class="event-img" id="my-event-img">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="container" id="collapse">
+                
+            </div>
+
+        </section>
+
+        <!--VenueDetails-->
+        <section id="venue-details">
+            
+        </section>
+
+        <script src="/static/script.js")></script>
+    </body>
+</html>
