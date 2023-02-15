@@ -1,10 +1,9 @@
-from flask import Flask,render_template, request,jsonify
+from flask import Flask,request,jsonify
 import urllib.request, json
 import keys
 from geolib import geohash
 import re
 from flask_cors import CORS, cross_origin
-import sys
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
