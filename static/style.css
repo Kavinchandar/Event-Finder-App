@@ -58,9 +58,9 @@ a:hover{
 
 #search-box{
     margin-top: 60px;
-    height: 350px;
-    min-width: 600px;
-    max-width: 600px;
+    height: 400px;
+    min-width: 650px;
+    max-width: 650px;
     border-radius: 20px;
     display: flex;
     justify-content: center;
@@ -128,7 +128,7 @@ a:hover{
 
 .card-2 .user-details-d .input-box input{
     display: block;
-    height: 25px;
+    height: 30px;
     width: 180px;
     border-radius: 8px;
     outline: none;
@@ -140,8 +140,8 @@ a:hover{
 .card-2 .user-details-c .input-box select{
     display: block;
     float: right;
-    height: 30px;
-    width: 260px;
+    height: 35px;
+    width: 300px;
     border-radius: 8px;
     outline: none;
     background-color: rgba(255,255,255,0);
@@ -306,7 +306,7 @@ a:hover{
 
 .event-info-item span{
     color: white;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 
@@ -314,6 +314,7 @@ a:hover{
     margin: 0px;
     padding: 0px;
 }
+
 
 .event-img{
     grid-area: content;
@@ -383,7 +384,7 @@ a:hover{
     margin-top: 30px;
     margin-bottom: 60px;
     width: 900px;
-    height: 300px;
+    height: 350px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -436,7 +437,7 @@ a:hover{
     display: flex;
     flex-direction: column;
     /* border: 2px solid black; */
-    gap: 10px;
+    /* gap: 10px; */
     
 }
 .venue-box-info{
@@ -455,6 +456,8 @@ a:hover{
 .Map{
     display: flex;
     justify-content: center;
+    padding-top: 10px;
+    border-right: 2px solid black;
     /* border: 2px solid black; */
 }
 .venue-box-next{

@@ -145,7 +145,7 @@ def getEventDetails():
     
 
     if 'priceRanges' in dict:
-        Prices = str(dict.get('priceRanges')[0].get('min')) + '-' + str(dict.get('priceRanges')[0].get('max')) + ' USD'
+        Prices = str(dict.get('priceRanges')[0].get('min')) + ' - ' + str(dict.get('priceRanges')[0].get('max')) + ' USD'
     
     if 'dates' in dict and 'status' in dict['dates']:
         Ticket_status = dict.get('dates').get('status').get('code')
