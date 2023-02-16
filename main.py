@@ -60,11 +60,12 @@ def getAllEvents():
     radius = args.get('radius',default='10')
     location = args.get('location')
     category = args.get('category',default='Default')
+    
 
     segmentID = {'Music': 'KZFzniwnSyZfZ7v7nJ', 'Sports':'KZFzniwnSyZfZ7v7nE', 'Arts':'KZFzniwnSyZfZ7v7na', 'Film':'KZFzniwnSyZfZ7v7nn', 'Miscellanious': 'KZFzniwnSyZfZ7v7n1','Default':''}
     geoPoint = geoCoding(location)
     
-    if not geoPoint:
+    if geoPoint == False:
         return {}
 
     url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey="+ keys.ticketmaster_api_key +"&keyword="+ keyword +"&segmentId="+ segmentID.get(category) +"&radius="+ str(radius) + "&unit=miles&geoPoint="+ geoPoint

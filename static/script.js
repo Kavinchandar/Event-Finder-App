@@ -58,7 +58,7 @@ async function handleClick() {
     }else{
         location = document.getElementById("location").value;
     }
-    //console.log(keyword,distance,category,location)
+    console.log(keyword,distance,category,location)
     
     //sending form data to backend if form valid
     if(keyword != '' && location != ''){
