@@ -301,40 +301,43 @@ async function displayVenue(venue){
     Query = Query.replace(/ /g,'+')
     Query = Query.replace(',','%2C')
     //console.log(Query);
-
-    venue_details = document.getElementById('venue-details');
-    venue_details.innerHTML = `
-    <div class="container">
-        <div class="venue-card">
-            <div class="border">
-                <div class='venue-box'>
-                    <div class='venue-box-title'>
-                        <span class="font">${Name}</span>
-                    </div>
-                    <div class='venue-box-image'>
-                        <image src="${image}" class='venue-size'></image>
-                    </div>
-                    <div class='special-box'>
-                        <div class='venue-box-info address'>
-                            <div style="">
-                                <span class="font"><strong>Address:</strong></span>
-                            </div>
-                            <div class="font">${address}
-                                <p>${city}</p>
-                                <p>${postalCode}</p>
-                            </div>
-                        </div> 
-                        <div class="Map">
-                            <a href="https://www.google.com/maps/search/?api=1&query=${Query}" target="_blank"><span class="font" style="color: blue;">Open in google Maps</span></a>
-                        </div>                                  
-                    </div>
-                    <div class='venue-box-next'>
-                        <a href="${upcoming}" target="_blank"><span class="font" style="color: blue;">More Events at this Venue</span></a>
-                    </div>
-                </div>                            
+     venue_details = document.getElementById('venue-details');
+    if(address || city || Name || postalCode || upcoming || image){
+        venue_details.innerHTML = `
+        <div class="container">
+            <div class="venue-card">
+                <div class="border">
+                    <div class='venue-box'>
+                        <div class='venue-box-title'>
+                            <span class="font">${Name}</span>
+                        </div>
+                        <div class='venue-box-image'>
+                            <image src="${image}" class='venue-size'></image>
+                        </div>
+                        <div class='special-box'>
+                            <div class='venue-box-info address'>
+                                <div style="">
+                                    <span class="font"><strong>Address:</strong></span>
+                                </div>
+                                <div class="font">${address}
+                                    <p>${city}</p>
+                                    <p>${postalCode}</p>
+                                </div>
+                            </div> 
+                            <div class="Map">
+                                <a href="https://www.google.com/maps/search/?api=1&query=${Query}" target="_blank"><span class="font" style="color: blue;">Open in google Maps</span></a>
+                            </div>                                  
+                        </div>
+                        <div class='venue-box-next'>
+                            <a href="${upcoming}" target="_blank"><span class="font" style="color: blue;">More Events at this Venue</span></a>
+                        </div>
+                    </div>                            
+                </div>
             </div>
-        </div>
-    </div>`;
+        </div>`;  
+    }else{
+        venue_details.innerHTML = '<div class="spaceholder"></div>';
+    }
 }
 
 //buttons

@@ -469,6 +469,11 @@ a:hover{
 }
 
 .venue-size{
-    width: auto;
+    width: 150px;
     height: auto;
+}
+
+.spaceholder{
+    width: 900px;
+    height: 100px;
 }
