@@ -35,7 +35,7 @@ def geoCoding(address):
         lat,long = address.split(',')
         return geohash.encode(lat,long,7)
     else:
-        address = re.sub("[^a-zA-Z0-9]","+",address)
+        address = address.replace(' ','+')
         url = "https://maps.googleapis.com/maps/api/geocode/json?address="+ address +"&key=" + keys.Geocoding_api_key
         response = urllib.request.urlopen(url)
         data = response.read()
@@ -64,7 +64,7 @@ def getAllEvents():
 
     segmentID = {'Music': 'KZFzniwnSyZfZ7v7nJ', 'Sports':'KZFzniwnSyZfZ7v7nE', 'Arts':'KZFzniwnSyZfZ7v7na', 'Film':'KZFzniwnSyZfZ7v7nn', 'Miscellanious': 'KZFzniwnSyZfZ7v7n1','Default':''}
     geoPoint = geoCoding(location)
-    
+    print(geoPoint)
     if geoPoint == False:
         return {}
 
