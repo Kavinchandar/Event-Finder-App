@@ -1,6 +1,6 @@
 # Event-Finder-App
 
-https://event-finder-app-377923.wl.r.appspot.com/ 
+https://hw6-event-finder-app.wl.r.appspot.com
 
 Click on this link to try it out :)
 
