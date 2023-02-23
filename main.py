@@ -4,6 +4,8 @@ import keys
 from geolib import geohash
 import re
 from flask_cors import CORS, cross_origin
+import json
+from collections import OrderedDict
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
@@ -39,11 +41,11 @@ def geoCoding(address):
         url = "https://maps.googleapis.com/maps/api/geocode/json?address="+ address +"&key=" + keys.Geocoding_api_key
         response = urllib.request.urlopen(url)
         data = response.read()
-        dict = json.loads(data)
-        if dict['results']:
+        dictionary = json.loads(data)
+        if dictionary['results']:
             latitude,longitude = '',''
-            latitude = dict.get('results')[0].get('geometry').get('location').get('lat')
-            longitude = dict.get('results')[0].get('geometry').get('location').get('lng')
+            latitude = dictionary.get('results')[0].get('geometry').get('location').get('lat')
+            longitude = dictionary.get('results')[0].get('geometry').get('location').get('lng')
             print(latitude,longitude)
             return geohash.encode(latitude,longitude,7)
         else:
@@ -72,16 +74,16 @@ def getAllEvents():
     url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey="+ keys.ticketmaster_api_key +"&keyword="+ keyword +"&segmentId="+ segmentID.get(category) +"&radius="+ str(radius) + "&unit=miles&geoPoint="+ geoPoint
     response = urllib.request.urlopen(url)
     data = response.read()
-    dict = json.loads(data)
+    dictionary = json.loads(data, object_pairs_hook=OrderedDict)
     
-    if '_embedded' not in dict:
+    if '_embedded' not in dictionary:
         return {}
 
     Data = {}
     Date,Time,Icon,Event,Genre,Venue = '','','','','',''
     count = 0
-    if 'events' in dict['_embedded']:
-        for event in dict.get('_embedded').get('events'):
+    if 'events' in dictionary['_embedded']:
+        for event in dictionary.get('_embedded').get('events'):
             if 'dates' in event and 'start' in event['dates'] and 'localDate' in event['dates']['start']:
                 Date = event.get('dates').get('start').get('localDate')
             if 'dates' in event and 'start' in event['dates'] and 'localTime' in event['dates']['start']:
@@ -108,35 +110,35 @@ def getEventDetails():
     url = "https://app.ticketmaster.com/discovery/v2/events/"+eventId+"?apikey="+keys.ticketmaster_api_key
     response = urllib.request.urlopen(url)
     data = response.read()
-    dict = json.loads(data)
+    dictionary = json.loads(data)
     
     Data = {}
     Name,Date,Time,Artist,Venue,Genre,Prices,Ticket_status,Buy_link,Seat_map = '','','',[],'','','','','',''
-    Name = dict['name']
+    Name = dictionary['name']
     Artist_urls = []
-    if 'dates' in dict and 'start' in dict['dates']:
-        Date = dict.get('dates').get('start').get('localDate')
-        Time = dict.get('dates').get('start').get('localTime')
+    if 'dates' in dictionary and 'start' in dictionary['dates']:
+        Date = dictionary.get('dates').get('start').get('localDate')
+        Time = dictionary.get('dates').get('start').get('localTime')
 
-    if '_embedded' in dict:
-        if 'attractions' in dict['_embedded']:
-            for event_name in dict.get('_embedded').get('attractions'):
+    if '_embedded' in dictionary:
+        if 'attractions' in dictionary['_embedded']:
+            for event_name in dictionary.get('_embedded').get('attractions'):
                 Artist.append(event_name.get('name'))
                 Artist_urls.append(event_name.get('url'))
-        if 'venues' in dict['_embedded']:
-            Venue = dict.get('_embedded').get('venues')[0].get('name')
+        if 'venues' in dictionary['_embedded']:
+            Venue = dictionary.get('_embedded').get('venues')[0].get('name')
     
-    if 'classifications' in dict:
-        if 'subGenre' in dict['classifications'][0] and 'name' in dict['classifications'][0]['subGenre'] :
-            Genre += dict.get('classifications')[0].get('subGenre').get('name') + ' | '
-        if 'genre' in dict['classifications'][0] and 'name' in dict['classifications'][0]['genre'] :
-            Genre += dict.get('classifications')[0].get('genre').get('name')  + ' | '
-        if 'segment' in dict['classifications'][0] and 'name' in dict['classifications'][0 ]['segment'] :
-            Genre += dict.get('classifications')[0].get('segment').get('name')  + ' | '
-        if 'subType' in dict['classifications'][0] and 'name' in dict['classifications'][0]['subType'] :
-            Genre += dict.get('classifications')[0].get('subType').get('name')  + ' | '
-        if 'type' in dict['classifications'][0] and 'name' in dict['classifications'][0]['type'] :
-            Genre += dict.get('classifications')[0].get('type').get('name')  + ' | '
+    if 'classifications' in dictionary:
+        if 'subGenre' in dictionary['classifications'][0] and 'name' in dictionary['classifications'][0]['subGenre'] :
+            Genre += dictionary.get('classifications')[0].get('subGenre').get('name') + ' | '
+        if 'genre' in dictionary['classifications'][0] and 'name' in dictionary['classifications'][0]['genre'] :
+            Genre += dictionary.get('classifications')[0].get('genre').get('name')  + ' | '
+        if 'segment' in dictionary['classifications'][0] and 'name' in dictionary['classifications'][0 ]['segment'] :
+            Genre += dictionary.get('classifications')[0].get('segment').get('name')  + ' | '
+        if 'subType' in dictionary['classifications'][0] and 'name' in dictionary['classifications'][0]['subType'] :
+            Genre += dictionary.get('classifications')[0].get('subType').get('name')  + ' | '
+        if 'type' in dictionary['classifications'][0] and 'name' in dictionary['classifications'][0]['type'] :
+            Genre += dictionary.get('classifications')[0].get('type').get('name')  + ' | '
     
     lst = Genre.split(' | ');
     Genre = ''
@@ -146,17 +148,17 @@ def getEventDetails():
     Genre = Genre[:-3]
     
 
-    if 'priceRanges' in dict:
-        Prices = str(dict.get('priceRanges')[0].get('min')) + ' - ' + str(dict.get('priceRanges')[0].get('max')) + ' USD'
+    if 'priceRanges' in dictionary:
+        Prices = str(dictionary.get('priceRanges')[0].get('min')) + ' - ' + str(dictionary.get('priceRanges')[0].get('max')) + ' USD'
     
-    if 'dates' in dict and 'status' in dict['dates']:
-        Ticket_status = dict.get('dates').get('status').get('code')
+    if 'dates' in dictionary and 'status' in dictionary['dates']:
+        Ticket_status = dictionary.get('dates').get('status').get('code')
     
-    if 'url' in dict:
-        Buy_link = dict.get('url')
+    if 'url' in dictionary:
+        Buy_link = dictionary.get('url')
     
-    if 'seatmap' in dict:
-        Seat_map = dict.get('seatmap').get('staticUrl')
+    if 'seatmap' in dictionary:
+        Seat_map = dictionary.get('seatmap').get('staticUrl')
 
     Data = {'Name':Name,'Date':(Date,Time), 'Artist':Artist,'Artist_urls':Artist_urls, 'Venue':Venue, 'Genre':Genre, 'Prices':Prices, 'Ticket_status':Ticket_status, 'Buy_link':Buy_link, 'Seat':Seat_map}
     return Data
@@ -171,12 +173,12 @@ def getVenueDetails():
     url = "https://app.ticketmaster.com/discovery/v2/venues?apikey="+ keys.ticketmaster_api_key +"&keyword="+keyword
     response = urllib.request.urlopen(url)
     data = response.read()
-    dict = json.loads(data)
+    dictionary = json.loads(data)
 
     Data = {}
     Name,Address,City,PostalCode,Upcoming_Events,Image = '','','','','',''
-    if '_embedded' in dict and 'venues' in dict['_embedded']:
-        parent = dict['_embedded']['venues'][0]
+    if '_embedded' in dictionary and 'venues' in dictionary['_embedded']:
+        parent = dictionary['_embedded']['venues'][0]
         if 'name' in parent:
             Name = parent.get('name')
         if 'address' in parent and 'line1' in parent['address']:

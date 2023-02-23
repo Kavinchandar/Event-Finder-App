@@ -74,7 +74,7 @@ async function handleClick() {
                 }
                 })
     
-                response = await response.json()
+                response = await response.json();
                 console.log(response);
 
                 //check if return json is valid
