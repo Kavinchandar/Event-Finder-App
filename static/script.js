@@ -96,7 +96,7 @@ async function handleClick() {
                     body = document.getElementById('table-body');
                     body.innerHTML = ``;
                     
-                    const keys =  Object.keys(response).reverse();
+                    const keys =  Object.keys(response);
 
                     keys.forEach(x => {
                         Event_id = x;
