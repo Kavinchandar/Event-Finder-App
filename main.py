@@ -61,6 +61,8 @@ def getAllEvents():
     location = args.get('location')
     category = args.get('category',default='Default')
     
+    if not radius:
+        radius = '10'
 
     segmentID = {'Music': 'KZFzniwnSyZfZ7v7nJ', 'Sports':'KZFzniwnSyZfZ7v7nE', 'Arts':'KZFzniwnSyZfZ7v7na', 'Film':'KZFzniwnSyZfZ7v7nn', 'Miscellanious': 'KZFzniwnSyZfZ7v7n1','Default':''}
     geoPoint = geoCoding(location)
