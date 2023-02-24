@@ -450,6 +450,7 @@ function clearAllElement(notfound=false) {
     document.getElementById('my-event-title').innerHTML = '';
     document.getElementById('my-event-info').innerHTML = '';
     document.getElementById('my-event-img').innerHTML = '';
+    document.getElementById('collapse').innerHTML = '';
     document.getElementById('venue-details').innerHTML = '';
     
 }
